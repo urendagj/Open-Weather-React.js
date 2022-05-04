@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Routes, Route, Navigate, useSearchParams } from 'react-router-dom';
+
+import Search from './weather/Search';
+import Post from './weather/Posts';
+
+
 
 function App() {
+  const [ searchParams ] = useSearchParams()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  
+    <Routes>
+      <Route
+        path="/search"
+        element={<Search query={searchParams.get("q")} />}
+      />
+      <Route path="/post" element={<Post />} />
+      <Route path="/" element={<Navigate to="/search" />} />
+    </Routes>
+    
   );
 }
 
